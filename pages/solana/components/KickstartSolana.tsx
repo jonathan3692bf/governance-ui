@@ -27,10 +27,10 @@ export default function KickstartSolana() {
         <div className="block md:hidden">
           <Button tertiary>
             <div className="relative flex items-center justify-center">
-              <div className="pl-4 pr-2">Read the Docs</div>
+              <div className="pl-4 pr-2  border-red">Read the Docs</div>
               <img
-                src="/img/realms-web/icons/external-link-white.png"
-                className="w-3 h-3 mr-4"
+                src="/img/realms-web/icons/external-link-thin-white.png"
+                className="w-4 h-4 mr-4"
                 alt="External link icon"
               />
             </div>

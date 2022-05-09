@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from 'react'
+import Link from 'next/link'
 import Loading from '../components/Loading'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,11 +40,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
   } else if (inverse) {
     // primary inverse (Create DAO Type)
     className +=
-      'px-7 py-4 md:py-6 bg-[#201f27] transition-to-gradient-background hover:text-[#292833]'
+      'px-7 py-4 md:py-6 bg-[#201f27] transition-to-gradient-background hover:text-[#292833] active:opacity-70'
+    // 'px-7 py-4 md:py-6 h-[56px] md:h-[64 fpx] md:w-full bg-[#201f27] transition-to-gradient-background hover:text-[#292833] active:opacity-70'
   } else {
     // primary (Create DAO)
     className +=
-      // 'py-4 w-[208px] h-[56px] md:h-[64px] font-normal text-black bg-gradient-to-r from-[#00C2FF] via-[#00E4FF] to-[#87F2FF] hover:bg-white active:bg-white/70'
       'py-4 w-[208px] h-[56px] md:h-[64px] font-normal text-black bg-gradient-to-r from-[#00C2FF] via-[#00E4FF] to-[#87F2FF] transition-to-white-background active:opacity-70'
     // transition-to-white-background
   }
@@ -78,26 +79,28 @@ export const ExploreButton = ({ bgOverride }) => {
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <Button secondary bgOverride={bgOverride}>
-        <div className="relative flex items-center justify-center bg-[#]">
-          <div
-            className={`${bgOverride} rounded-full ml-2 mr-2 p-2 absolute left-[-0.5rem]`}
-          >
+        <Link href="/realms">
+          <div className="relative flex items-center justify-center">
             <div
-              className={` ${
-                isHovering
-                  ? 'bg-[url(/img/realms-web/icons/binoculars-white.png)] '
-                  : 'bg-[url(/img/realms-web/icons/binoculars-blue.png)] '
-              }
-          w-5 h-5 bg-cover overflow-hidden text-transparent`}
+              className={`${bgOverride} rounded-full ml-2 mr-2 p-2 absolute left-[-0.5rem]`}
             >
-              Binoculars
+              <div
+                className={` ${
+                  isHovering
+                    ? 'bg-[url(/img/realms-web/icons/binoculars-white.png)] '
+                    : 'bg-[url(/img/realms-web/icons/binoculars-blue.png)] '
+                }
+          w-5 h-5 bg-cover overflow-hidden text-transparent`}
+              >
+                Binoculars
+              </div>
+            </div>
+            <div className="relative px-8 left-[0.5rem]">
+              <div className="md:hidden">Explore</div>
+              <div className="hidden md:block">Explore DAOs</div>
             </div>
           </div>
-          <div className="relative px-8 left-[0.5rem]">
-            <div className="md:hidden">Explore</div>
-            <div className="hidden md:block">Explore DAOs</div>
-          </div>
-        </div>
+        </Link>
       </Button>
     </div>
   )
@@ -109,8 +112,8 @@ export const ReadTheDocsButton = () => {
       <div className="relative flex items-center justify-center">
         <div className="pl-4 pr-2">Read the Docs</div>
         <img
-          src="/img/realms-web/icons/external-link-white.png"
-          className="w-3 h-3 mr-4"
+          src="/img/realms-web/icons/external-link-thin-white.png"
+          className="w-4 h-4 mr-4"
           alt="External link icon"
         />
       </div>

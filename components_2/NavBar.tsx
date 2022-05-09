@@ -18,12 +18,11 @@ export const NavContent = ({ showWalletButton = false, bgOverride }) => {
       {showWalletButton ? (
         <ConnectWalletButton />
       ) : (
-        <div className="flex items-center space-x-7">
+        <div className="flex items-center space-x-4">
           <div className="hidden md:block">
             <ReadTheDocsButton />
           </div>
           <ExploreButton bgOverride={bgOverride} />
-          {/* <ExploreButton bgcolour={'#292833'} bg-[#201f27]/> */}
         </div>
       )}
     </div>

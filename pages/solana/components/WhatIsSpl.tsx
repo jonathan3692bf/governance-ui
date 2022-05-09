@@ -36,22 +36,16 @@ const SplGov = () => {
             <Button withBorder>
               <div className="relative flex items-center justify-center px-4">
                 <div className="pr-2">Read about SPL Governance</div>
-                <svg
-                  width="13"
-                  height="12"
-                  viewBox="0 0 13 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8 0L7.25 0.75L8.96967 2.46967L5.21968 6.21967L6.28034 7.28033L10.0303 3.53033L11.75 5.25L12.5 4.5V0H8Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M1.25 1.5H5V3H2.75V9.75H9.5V7.5H11V11.25H1.25V1.5Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                <img
+                  src="/img/realms-web/icons/external-link-thin-white.png"
+                  className="w-4 h-4 mr-4 starting-image"
+                  alt="External link icon"
+                />
+                <img
+                  src="/img/realms-web/icons/external-link-thin-black.png"
+                  className="w-4 h-4 mr-4 hover-image"
+                  alt="External link icon"
+                />
               </div>
             </Button>
           </div>
