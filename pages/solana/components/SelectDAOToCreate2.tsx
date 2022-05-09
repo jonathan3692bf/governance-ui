@@ -9,7 +9,7 @@ const CreateDaoButton = ({ text, href }) => {
     <Link href={href}>
       <Button inverse>
         <div className="flex items-center">
-          <div className="pr-2 text-[18px]">{text}</div>
+          <div className="pr-2">{text}</div>
           <img
             src="/img/realms-web/icons/arrow-thin-blue.png"
             className="w-4 h-4 starting-image"

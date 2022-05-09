@@ -12,7 +12,9 @@ export const NavContent = ({ showWalletButton = false, bgOverride }) => {
             src="/img/realms-web/icons/logo-realms-blue.png"
             className="w-8 h-8"
           />
-          <span>Realms</span>
+          <span className="text-[18px] font-light leading-[25.2px]">
+            Realms
+          </span>
         </div>
       </Link>
       {showWalletButton ? (

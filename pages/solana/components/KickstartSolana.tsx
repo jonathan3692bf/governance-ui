@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Button from 'components_2/Button'
 import Hero from 'components_2/Hero'
 import Header from 'components_2/Header'
+import Text from 'components_2/Text'
 
 export default function KickstartSolana() {
   return (
@@ -12,8 +13,10 @@ export default function KickstartSolana() {
           <br />
           community on Solana
         </Header>
-        <div className="mt-4 text-base font-light tracking-tight text-center text-white mb-11 md:mb-14 md:text-left">
-          Create and participate in fully on-chain DAOs of all kinds.
+        <div className="mt-4 mb-11 md:mb-14 text-white">
+          <Text as="text-base">
+            Create and participate in fully on-chain DAOs of all kinds.
+          </Text>
         </div>
       </div>
       <div className="pb-12 space-y-4 text-center md:pb-24 md:text-left">
