@@ -1,101 +1,139 @@
 import Link from 'next/link'
 import Button from '../../../components_2/Button'
-import { DaoType } from '../../../components_2/DaoType'
-import { DaoIcon } from '../../../components_2/DaoIcon'
 import Header from '../../../components_2/Header'
 
-const CreateDaoButton = ({ text, href }) => {
+const CreateDaoButton = ({ text, href, className }) => {
   return (
-    <Link href={href}>
-      <Button inverse>
-        <div className="flex items-center">
-          <div className="pr-2 text-[18px]">{text}</div>
-          <img
-            src="/img/realms-web/icons/arrow-thin-blue.png"
-            className="w-4 h-4 starting-image"
-            alt="arrow"
-          />
-          <img
-            src="/img/realms-web/icons/arrow-thin-black.png"
-            className="w-4 h-4 hover-image"
-            alt="arrow"
-          />
-        </div>
-      </Button>
-    </Link>
+    <div className={className}>
+      <Link href={href}>
+        <Button inverse>
+          <div className="flex items-center justify-between w-full">
+            {/* <div className="flex items-center justify-between w-[306px]"> */}
+            <div className="pr-2">{text}</div>
+            <img
+              src="/img/realms-web/icons/arrow-thin-blue.png"
+              className="w-4 h-4 starting-image"
+              alt="arrow"
+            />
+            <img
+              src="/img/realms-web/icons/arrow-thin-black.png"
+              className="w-4 h-4 hover-image"
+              alt="arrow"
+            />
+          </div>
+        </Button>
+      </Link>
+    </div>
   )
 }
 
+export const SmallImageWithDescription = ({ src, label }) => (
+  <div className="flex flex-col text-center">
+    {/* NavyBox */}
+    <img src={`/img/realms-web/icons/${src}.svg`} className="my-2 h-7" alt="" />
+    <p className="text-sm opacity-70 max-w-[100px]">{label}</p>
+  </div>
+)
+
+export const DAOType = ({
+  // GreenBox
+  mainImgSrc,
+  headerText,
+  descriptionText,
+  smallImgSrcs,
+  buttonText,
+  buttonHref,
+}) => (
+  // GreenBox
+  <div className="flex flex-col items-center md:items-start md:flex-row lg:flex-col">
+    {/* <div className="flex"> */}
+    {/* OrangeBox */}
+    <div className="md:w-1/5">
+      <img
+        className="max-w-[200px] w-full md:w-[160px] lg:w-[180px]"
+        src={`/img/realms-web/icons/${mainImgSrc}.png`}
+        alt=""
+      />
+    </div>
+    <div className="md:w-4/5">
+      <div className="text-center md:text-left">
+        {/* LimeBox */}
+        <Header as="h4" className="mb-2 md:mb-5">
+          {headerText}
+        </Header>
+        {/* LavenderBox */}
+        <p className="font-light text-[14px] md:text-[18px] leading-[19.6px] md:leading-[25.2px] opacity-70">
+          {descriptionText}
+        </p>
+      </div>
+      {/* PurpleBox*/}
+      {/* <div className="flex flex-row justify-between space-x-4 px-12 py-4 md:px-0 xl:px-4"> */}
+      <div className="flex flex-row justify-center md:justify-start lg:justify-center py-4 px-12 md:px-4 lg:px-4 space-x-4 md:space-x-12 lg:space-px-4">
+        {smallImgSrcs.map(({ smallSrc, label }, index) => (
+          <SmallImageWithDescription
+            key={`${label}-${index}`}
+            src={smallSrc}
+            label={label}
+          />
+        ))}
+      </div>
+      <CreateDaoButton
+        text={buttonText}
+        href={buttonHref}
+        className="flex justify-center md:justify-start"
+      />
+    </div>
+  </div>
+)
+
 export const ListOfDAOTypes = () => {
   return (
-    <div className="flex flex-col justify-between space-y-4 md:flex-row md:space-y-0">
-      <div className="flex flex-col w-full md:w-[30%]">
-        <DaoType
-          imgSrc="/img/realms-web/icons/dao-type-medium-multisig.png"
-          daoTheme="Multi-Signature DAO"
-          text='A "multisig" DAO is a shared wallet, typically with two or more members authorizing transactions. This is a secure way for groups to store and access funds'
-        />
-        <div className="pb-6 md:pb-8 flex justify-center md:justify-between md:pr-6 w-full pt-4 space-x-8 md:space-x-0 md:pt-6 min-h-[125px]">
-          <DaoIcon imgSrc="ukraine-dao" daoName="Ukraine.Sol" />
-          <DaoIcon imgSrc="socean-dao" daoName="SOCEAN" />
-          <div className="hidden xl:block">
-            <DaoIcon imgSrc="sctf1-dao" daoName="SCTF1" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-end md:items-start grow">
-          <CreateDaoButton
-            text="Start Multi-Signature DAO"
-            href="/solana/create_dao/multisig"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col w-full md:w-[30%]">
-        <DaoType
-          imgSrc="/img/realms-web/icons/dao-type-medium-nft.png"
-          daoTheme="NFT Community DAO"
-          text="NFT Community DAOs leverage NFTs as membership, giving holders of NFTs within specified collections voting power to make investment decisions."
-        />
-        <div className="pb-6 md:pb-8 flex justify-center md:justify-between md:pr-6 w-full pt-4 space-x-8 md:space-x-0 md:pt-6 min-h-[125px]">
-          <DaoIcon imgSrc="cardinal-dao" daoName="Cardinall" />
-          <DaoIcon imgSrc="serum-dao" daoName="Serum" />
-          <div className="hidden xl:block">
-            <DaoIcon imgSrc="monke-dao" daoName="MonkeDAO" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-end md:items-start grow">
-          <CreateDaoButton
-            text="Start NFT Community DAO"
-            href="/solana/create_dao/nft"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col w-full md:w-[30%]">
-        <DaoType
-          imgSrc="/img/realms-web/icons/dao-type-medium-govtoken.png"
-          daoTheme="Governance Token DAO"
-          text="Governance Token DAOs help orgs determine how its funds are used. This flat voting hierarchy allows anyone to participate in the decisions of the org."
-        />
-        <div className="pb-6 md:pb-8 flex justify-center md:justify-between md:pr-6 w-full pt-4 space-x-8 md:space-x-0 md:pt-6 min-h-[125px]">
-          <DaoIcon imgSrc="mango-dao" daoName="MangoDAO" />
-          <DaoIcon imgSrc="f-and-f-dao" daoName="Friends and Family DAO" />
-          <div className="hidden xl:block">
-            <DaoIcon imgSrc="metaplex-dao" daoName="Metaplex Foundation" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-end md:items-start grow">
-          <CreateDaoButton
-            text="Start Gov Token DAO"
-            href="/solana/create_dao/gov-token"
-          />
-        </div>
-      </div>
+    <div className="flex flex-col justify-betwee space-y-4 md:flex-col lg:flex-row lg:space-x-8">
+      <DAOType
+        mainImgSrc="dao-type-medium-multisig"
+        headerText="Multi-Signature DAO"
+        descriptionText='A "multisig" DAO is a shared wallet, typically with two or more members authorizing transactions. This is a secure way for groups to store and access funds'
+        smallImgSrcs={[
+          { smallSrc: 'ukraine-dao', label: 'Ukraine.Sol' },
+          { smallSrc: 'socean-dao', label: 'SOCEAN' },
+          { smallSrc: 'sctf1-dao', label: 'SCTF1' },
+        ]}
+        buttonText="Start Multi-Signature DAO"
+        buttonHref="/solana/create_dao/multisig"
+      />
+
+      <DAOType
+        mainImgSrc="dao-type-medium-nft"
+        headerText="HNFT Community DAO"
+        descriptionText="NFT Community DAOs leverage NFTs as membership, giving holders of NFTs within specified collections voting power to make investment decisions."
+        smallImgSrcs={[
+          { smallSrc: 'cardinal-dao', label: 'Cardinall' },
+          { smallSrc: 'serum-dao', label: 'Serum' },
+          { smallSrc: 'monke-dao', label: 'MonkeDAO' },
+        ]}
+        buttonText="Start NFT Community DAO"
+        buttonHref="/solana/create_dao/nft"
+      />
+
+      <DAOType
+        mainImgSrc="dao-type-medium-govtoken"
+        headerText="Governance Token DAO"
+        descriptionText="Governance Token DAOs help orgs determine how its funds are used. This flat voting hierarchy allows anyone to participate in the decisions of the org."
+        smallImgSrcs={[
+          { smallSrc: 'mango-dao', label: 'MangoDAO' },
+          { smallSrc: 'f-and-f-dao', label: 'Friends and Family DAO' },
+          { smallSrc: 'metaplex-dao', label: 'Metaplex Foundation' },
+        ]}
+        buttonText="Start Gov Token DAO"
+        buttonHref="/solana/create_dao/gov-token"
+      />
     </div>
   )
 }
 
 const SelectDAOToCreate = () => {
   return (
-    <div className="pt-16 pb-16 md:pt-24 md:pb-28">
+    <div className="py-16 md:pt-24 md:pb-28">
       <div className="mb-4 text-center md:text-left">
         <Header as="h2" withGradient>
           What types of DAO <br /> would you like to create?

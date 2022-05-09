@@ -4,7 +4,6 @@ import Navbar from '../../components_2/NavBar'
 import KickstartSolana from './components/KickstartSolana'
 import PerfectForDAOs from './components/PerfectForDAOs'
 import SelectDAOToCreate from './components/SelectDAOToCreate'
-import SelectDAOToCreate2 from './components/SelectDAOToCreate2'
 import WhatRealmsCanDo from './components/WhatRealmsCanDo'
 import WhatIsSPL from './components/WhatIsSpl'
 import WhatIsADAO from './components/WhatIsADAO'
@@ -38,8 +37,6 @@ const Solana = () => {
       </Section>
       <Section bgColor="bg-[#292833]">
         <SelectDAOToCreate />
-        <hr />
-        <SelectDAOToCreate2 />
       </Section>
       <Section bgColor="bg-[#292833]" showTopGlow>
         <WhatRealmsCanDo />

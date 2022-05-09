@@ -3,7 +3,7 @@ import Header from './Header'
 export const DaoType2 = ({ imgSrc, daoTheme, text, children }) => {
   return (
     // <div className="flex flex-col items-center md:items-start">
-    <div className="flex flex-col items-center md:flex-row xl:flex-col md:items-start">
+    <div className="flex flex-col justify-between items-center md:flex-row xl:flex-col md:items-start">
       {/* <div className="flex flex-col items-center md:items-start"> */}
       <div className="md:w-1/5 md:items-start">
         {/* <div className="w-full items-center md:w-1/5 lg:items-center"> */}
