@@ -1,13 +1,12 @@
 import Link from 'next/link'
-import Button from '../../../components_2/Button'
-import Header from '../../../components_2/Header'
+import Button from 'components_2/Button'
+import Header from 'components_2/Header'
 
 const CreateDaoButton = ({ text, href, className }) => {
   return (
     <div className={className}>
       <Link href={href}>
         <Button inverse>
-          {/* <div className="flex items-center justify-between w-full"> */}
           <div className="flex items-center justify-between min-w-[10rem] w-[250px]">
             <div className="pr-2">{text}</div>
             <img
@@ -37,7 +36,7 @@ export const SmallImageWithDescription = ({ src, label }) => (
 
 export const DAOType = ({
   // GreenBox
-  mainImgSrc,
+  // mainImgSrc, {/* Placeholder Image */}
   headerText,
   descriptionText,
   smallImgSrcs,
@@ -47,13 +46,14 @@ export const DAOType = ({
   // GreenBox
   <div className="flex flex-col items-center md:items-start md:flex-row lg:flex-col min-w-[10rem]">
     {/* OrangeBox */}
-    <div className="min-w-[150px] md:w-1/5">
+    {/* Placeholder Image - will get included after initial launch */}
+    {/* <div className="min-w-[150px] md:w-1/5">
       <img
         className="max-w-[200px] w-full md:w-[160px] lg:w-[180px]"
         src={`/img/realms-web/icons/${mainImgSrc}.png`}
         alt=""
       />
-    </div>
+    </div> */}
     <div className="w-4/5 md:w-3/5 lg:w-full">
       <div className="text-center md:text-left">
         {/* LimeBox */}
@@ -88,10 +88,10 @@ export const DAOType = ({
 
 export const ListOfDAOTypes = () => {
   return (
-    <div className="flex flex-col justify-between space-y-5 md:space-y-20 lg:space-y-0 md:flex-col lg:flex-row lg:space-x-8 mt-8 md:mt-16">
+    <div className="flex flex-col justify-between space-y-20 lg:space-y-0 md:flex-col lg:flex-row lg:space-x-8 mt-16">
       {/* <div className="flex flex-col justify-between md:flex-col lg:flex-row lg:space-x-8 mt-16"> */}
       <DAOType
-        mainImgSrc="dao-type-medium-multisig"
+        // mainImgSrc="dao-type-medium-multisig" {/* Placeholder Image */}
         headerText="Multi-Signature DAO"
         descriptionText='A "multisig" DAO is a shared wallet, typically with two or more members authorizing transactions. This is a secure way for groups to store and access funds'
         smallImgSrcs={[
@@ -104,7 +104,7 @@ export const ListOfDAOTypes = () => {
       />
 
       <DAOType
-        mainImgSrc="dao-type-medium-nft"
+        // mainImgSrc="dao-type-medium-nft" {/* Placeholder Image */}
         headerText="HNFT Community DAO"
         descriptionText="NFT Community DAOs leverage NFTs as membership, giving holders of NFTs within specified collections voting power to make investment decisions."
         smallImgSrcs={[
@@ -117,7 +117,7 @@ export const ListOfDAOTypes = () => {
       />
 
       <DAOType
-        mainImgSrc="dao-type-medium-govtoken"
+        // mainImgSrc="dao-type-medium-govtoken" {/* Placeholder Image */}
         headerText="Governance Token DAO"
         descriptionText="Governance Token DAOs help orgs determine how its funds are used. This flat voting hierarchy allows anyone to participate in the decisions of the org."
         smallImgSrcs={[

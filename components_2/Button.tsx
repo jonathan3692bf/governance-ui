@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   inverse?: boolean
   withBorder?: boolean
   bgOverride?: string
+  addFlexHeight?: string
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -21,6 +22,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   inverse = false,
   withBorder = false,
   bgOverride = '',
+  addFlexHeight = '',
   ...props
 }) => {
   let className = `z-0 relative transition-all duration-300 rounded-full font-serif text-[16px] hover:cursor-pointer opacity-[84] hover:opacity-100 change-image-on-hover focus:border `
@@ -44,9 +46,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
     // 'px-7 py-4 md:py-6 h-[56px] md:h-[64 fpx] md:w-full bg-[#201f27] transition-to-gradient-background hover:text-[#292833] active:opacity-70'
   } else {
     // primary (Create DAO)
-    className +=
-      'py-4 w-[208px] h-[56px] md:h-[64px] font-normal text-black bg-gradient-to-r from-[#00C2FF] via-[#00E4FF] to-[#87F2FF] transition-to-white-background active:opacity-70'
-    // transition-to-white-background
+    className += `${addFlexHeight} md:w-[208px] font-normal text-black bg-gradient-to-r from-[#00C2FF] via-[#00E4FF] to-[#87F2FF] transition-to-white-background active:opacity-70`
   }
 
   if (isLoading) {
@@ -71,11 +71,15 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
 export default Button
 
-export function CreateDaoButton() {
+export function CreateDaoButton({ inNavBar = true }) {
   return (
-    <Button>
+    <Button addFlexHeight={`${inNavBar ? 'h-[48px] md:h-[64px]' : 'h-[64px]'}`}>
       <Link href="/solana/create_dao">
-        <div className="px-14">Create DAO</div>
+        <div
+          className={`flex items-center ${inNavBar ? 'px-[25px]' : 'px-14'}`}
+        >
+          Create DAO
+        </div>
       </Link>
     </Button>
   )

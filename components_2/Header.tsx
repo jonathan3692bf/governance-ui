@@ -10,7 +10,7 @@ export default function Header({
   if (as === 'h1') {
     classNames += ` `
   } else if (as === 'h2') {
-    classNames += ` `
+    classNames += `h3 md:h2`
   } else if (as === 'h3') {
     classNames += ` `
   } else if (as === 'h4') {

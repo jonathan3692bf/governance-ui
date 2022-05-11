@@ -17,7 +17,7 @@ export default function KickstartSolana() {
       </div>
       <div className="pb-12 space-y-4 text-center md:pb-24 md:text-left">
         <div>
-          <CreateDaoButton />
+          <CreateDaoButton inNavBar={false} />
         </div>
         <div className="block md:hidden">
           <ReadTheDocsButton />
