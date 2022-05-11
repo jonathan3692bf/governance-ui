@@ -88,7 +88,7 @@ export const DAOType = ({
 
 export const ListOfDAOTypes = () => {
   return (
-    <div className="flex flex-col justify-between space-y-20 lg:space-y-0 md:flex-col lg:flex-row lg:space-x-8 mt-16">
+    <div className="flex flex-col justify-between space-y-16 lg:space-y-0 md:flex-col lg:flex-row lg:space-x-8 mt-16">
       {/* <div className="flex flex-col justify-between md:flex-col lg:flex-row lg:space-x-8 mt-16"> */}
       <DAOType
         // mainImgSrc="dao-type-medium-multisig" {/* Placeholder Image */}

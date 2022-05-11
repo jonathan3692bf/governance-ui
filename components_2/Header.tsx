@@ -1,4 +1,5 @@
 import { createElement } from 'react'
+import useIsSmallScreen from './Utils'
 
 export default function Header({
   as = 'h2',
@@ -6,11 +7,13 @@ export default function Header({
   className = '',
   children,
 }) {
-  let classNames = 'landing-page font-light'
+  const isSmall = useIsSmallScreen()
+
+  let classNames = `landing-page font-light ${isSmall ? `small` : ''}`
   if (as === 'h1') {
     classNames += ` `
   } else if (as === 'h2') {
-    classNames += `h3 md:h2`
+    classNames += ` `
   } else if (as === 'h3') {
     classNames += ` `
   } else if (as === 'h4') {

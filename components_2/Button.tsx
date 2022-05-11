@@ -76,7 +76,9 @@ export function CreateDaoButton({ inNavBar = true }) {
     <Button addFlexHeight={`${inNavBar ? 'h-[48px] md:h-[64px]' : 'h-[64px]'}`}>
       <Link href="/solana/create_dao">
         <div
-          className={`flex items-center ${inNavBar ? 'px-[25px]' : 'px-14'}`}
+          className={`flex items-center justify-center ${
+            inNavBar ? 'px-[25px]' : 'px-14'
+          }`}
         >
           Create DAO
         </div>

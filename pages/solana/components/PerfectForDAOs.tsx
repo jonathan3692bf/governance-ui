@@ -1,5 +1,5 @@
-import { IconInfoBox } from '../../../components_2/IconInfoBox'
-import Header from '../../../components_2/Header'
+import { IconInfoBox } from 'components_2/IconInfoBox'
+import Header from 'components_2/Header'
 
 export default function PerfectForDAOs() {
   return (
