@@ -1,8 +1,5 @@
-import Header from '../../../components_2/Header'
-import {
-  MetricsBoxPlus,
-  MetricsBoxDollar,
-} from '../../../components_2/MetricsBox'
+import Header from 'components_2/Header'
+import { MetricsBoxPlus, MetricsBoxDollar } from 'components_2/MetricsBox'
 
 const RealmsMetrics = () => {
   return (

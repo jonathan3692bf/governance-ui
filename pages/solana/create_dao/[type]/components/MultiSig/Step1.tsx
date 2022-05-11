@@ -1,8 +1,12 @@
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
+import { useWalletIdentity } from '@cardinal/namespaces-components'
+
+import { notify } from '@utils/notifications'
+import useWalletStore from 'stores/useWalletStore'
 
 import FormHeader from '../FormHeader'
 import FormField, { ImageUploader } from '../FormField'
@@ -10,14 +14,12 @@ import Input from '../Input'
 import Button from 'components_2/Button'
 import FormFooter from '../FormFooter'
 
+import { STEP1_SCHEMA, updateUserInput } from './Wizard'
+
 export default function Step1({ onSubmit, onPrevClick }) {
-  const { query } = useRouter()
-  const schemaObject = {
-    daoAvatar: yup.string(),
-    daoName: yup.string().typeError('Required').required('Required'),
-    daoDescription: yup.string(),
-  }
-  const schema = yup.object(schemaObject).required()
+  const { connected, connection, current: wallet } = useWalletStore((s) => s)
+  const { show } = useWalletIdentity()
+  const schema = yup.object(STEP1_SCHEMA).required()
   const {
     getValues,
     setValue,
@@ -30,32 +32,34 @@ export default function Step1({ onSubmit, onPrevClick }) {
   })
 
   useEffect(() => {
-    if (query?.step1 && !Array.isArray(query.step1)) {
-      const formData = JSON.parse(query.step1)
-      Object.keys(schemaObject).forEach((fieldName) => {
-        const value =
-          fieldName === 'daoAvatar'
-            ? localStorage.getItem(fieldName)
-            : formData[fieldName]
-        setValue(fieldName, value, {
-          shouldValidate: true,
-          shouldDirty: true,
-        })
-      })
-    }
-  }, [query])
+    updateUserInput(STEP1_SCHEMA, setValue)
+  }, [])
 
   function serializeValues(values) {
-    delete values?.daoAvatar
     onSubmit({ step: 1, data: values })
   }
 
   function handleAvatarSelect(fileInput) {
-    setValue('daoAvatar', fileInput, {
+    setValue('avatar', fileInput, {
       shouldValidate: true,
       shouldDirty: true,
     })
-    localStorage.setItem('daoAvatar', fileInput)
+  }
+
+  async function handleLinkTwitterClick() {
+    if (!connected) {
+      try {
+        if (wallet) await wallet.connect()
+        // @ts-ignore
+        await show(wallet, connection.current, connection.cluster)
+      } catch (error) {
+        const err = error as Error
+        return notify({
+          type: 'error',
+          message: err.message,
+        })
+      }
+    }
   }
 
   return (
@@ -76,12 +80,12 @@ export default function Step1({ onSubmit, onPrevClick }) {
           title="What's your DAO's avatar?"
           description="The avatar you choose will visually represent your DAO"
           optional
-          defaultValue={getValues('daoAvatar')}
-          error={errors.daoAvatar?.message || ''}
+          defaultValue={getValues('avatar')}
+          error={errors.avatar?.message || ''}
           onSelect={handleAvatarSelect}
         />
         <Controller
-          name="daoName"
+          name="name"
           control={control}
           defaultValue=""
           render={({ field }) => (
@@ -92,14 +96,14 @@ export default function Step1({ onSubmit, onPrevClick }) {
               <Input
                 placeholder="e.g. RealmsDAO"
                 data-testid="dao-name-input"
-                error={errors.daoName?.message || ''}
+                error={errors.name?.message || ''}
                 {...field}
               />
             </FormField>
           )}
         />
         <Controller
-          name="daoDescription"
+          name="description"
           defaultValue=""
           control={control}
           render={({ field }) => (
@@ -111,7 +115,7 @@ export default function Step1({ onSubmit, onPrevClick }) {
               <Input
                 placeholder="e.g. My DAO is..."
                 data-testid="dao-description-input"
-                error={errors.daoDescription?.message || ''}
+                error={errors.description?.message || ''}
                 {...field}
               />
             </FormField>
@@ -122,7 +126,12 @@ export default function Step1({ onSubmit, onPrevClick }) {
           optional
           description="Your your DAO's Twitter  account can connect to Realms (via Cardinal)."
         >
-          <Button secondary bgOverride="bg-[#201f27]" type="button">
+          <Button
+            secondary
+            bgOverride="bg-[#201f27]"
+            type="button"
+            onClick={handleLinkTwitterClick}
+          >
             <div className="relative flex items-center justify-center px-4">
               <svg
                 className="fill-[#6496f6] stroke-[#6496f6]"

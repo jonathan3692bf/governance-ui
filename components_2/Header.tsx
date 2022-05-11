@@ -6,16 +6,18 @@ export default function Header({
   className = '',
   children,
 }) {
-  let classNames = className
+  let classNames = 'landing-page font-light'
   if (as === 'h1') {
-    classNames += `text-[40px] md:text-[70px] font-medium leading-[44px] md:leading-[70px]`
+    classNames += ` `
   } else if (as === 'h2') {
-    classNames += `text-[24px] md:text-[36px] font-normal tracking-tight leading-[26.4px] md:leading-[39.6px]`
+    classNames += ` `
   } else if (as === 'h3') {
-    classNames += `text-[20px] md:text-[24px] font-normal leading-[22px] md:leading-[26.4px]`
+    classNames += ` `
   } else if (as === 'h4') {
-    classNames += `text-[16px] md:text-[20px] font-normal leading-[17.6px] md:leading-[22px]`
+    classNames += ` `
   }
+
+  classNames += ` ${className}`
 
   if (withGradient) {
     classNames += ` bg-gradient-to-r from-[#00C2FF] via-[#00E4FF] to-[#87F2FF] bg-clip-text text-transparent`

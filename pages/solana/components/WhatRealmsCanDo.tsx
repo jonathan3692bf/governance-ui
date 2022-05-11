@@ -1,4 +1,4 @@
-import Header from '../../../components_2/Header'
+import Header from 'components_2/Header'
 
 const OptionsBox = ({
   imgSrc,
@@ -76,11 +76,9 @@ const ListOfPros = [
 const WhatRealmsCanDo = () => {
   return (
     <div className="pb-20 pt-9 md:pt-24">
-      <div className="text-center">
-        <Header as="h2" withGradient>
-          What you can do on Realms
-        </Header>
-      </div>
+      <Header as="h2" withGradient className="text-center">
+        What you can do on Realms
+      </Header>
       <div className="space-y-20 pt-14 md:pt-20">
         {ListOfPros.map((props) => (
           <OptionsBox key={props.title} {...props} />

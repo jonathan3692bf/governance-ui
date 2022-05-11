@@ -82,39 +82,53 @@ h4 {
   @apply font-sans font-light;
 }
 
-.landing-page h1 {
-  @apply font-serif;
-  /* font-size: 50px;
-  letter-spacing: -0.5px;
-  line-height: 110%; */
+.landing-page .hero {
+  font-size: 70px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: -0.35px;
 }
 
-.landing-page h2 {
+.landing-page h1,
+h1.landing-page {
   @apply font-serif;
-  /* font-size: 36px;
+  font-size: 50px;
   letter-spacing: -0.5px;
-  line-height: 110%; */
+  line-height: 110%;
 }
 
-.landing-page h3 {
+.landing-page h2,
+h2.landing-page {
   @apply font-serif;
-  /* font-size: 24px;
+  font-size: 36px;
   letter-spacing: -0.5px;
-  line-height: 110%; */
+  line-height: 110%;
 }
 
-.landing-page h4 {
+.landing-page h3,
+h3.landing-page {
   @apply font-serif;
-  /* font-size: 20px;
+  font-size: 24px;
   letter-spacing: -0.5px;
-  line-height: 110%; */
+  line-height: 110%;
 }
 
-.landing-page h5 {
-  @apply font-sans;
-  /* font-size: 16px;
+.landing-page h4,
+h4.landing-page {
+  @apply font-serif;
+  font-size: 20px;
   letter-spacing: -0.5px;
-  line-height: 110%; */
+  line-height: 110%;
+}
+
+.landing-page h5,
+h5.landing-page {
+  @apply font-serif;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  line-height: 110%;
 }
 
 .landing-page a {
@@ -125,25 +139,26 @@ h4 {
   line-height: 110%; */
 }
 
-.landing-page .text-xs {
+ {
+  /* .landing-page .text-xs  */
+}
+
+.landing-page .text-xs,
+.landing-page.text-xs {
   font-size: 12px;
   letter-spacing: 0px;
   line-height: 140%;
 }
 
-.landing-page .text-sm {
+.landing-page .text-sm,
+.landing-page.text-sm {
   font-size: 14px;
   letter-spacing: 0px;
   line-height: 140%;
 }
 
-.landing-page .text-md {
-  font-size: 16px;
-  letter-spacing: 0px;
-  line-height: 140%;
-}
-
-.landing-page .text-base {
+.landing-page .text-base,
+.landing-page.text-base {
   font-size: 18px;
   letter-spacing: 0px;
   line-height: 140%;
@@ -324,4 +339,62 @@ body::-webkit-scrollbar-corner {
 .border-gradient.white-fill {
   background-image: linear-gradient(white, white),
     linear-gradient(93deg, #00c2ff 3%, #00e4ff 50%, #87f2ff 98%);
+}
+
+/* .input-range-with-gradient {
+  width: 32px;
+  height: 32px;
+  flex-grow: 0;
+  margin: 0 223px 0 363px;
+  border-radius: 25px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border: solid 5px rgba(255, 255, 255, 0.08);
+  background-color: #fff;
+} */
+
+input[type='range'].with-gradient {
+  -webkit-appearance: none;
+  height: 16px;
+  background: #1f1f20;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    to right,
+    #00c2ff 0%,
+    #00e4ff 50%,
+    #87f2ff 100%
+  );
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+}
+
+input[type='range'].with-gradient::-moz-range-thumb {
+  -webkit-appearance: none;
+  cursor: ew-resize;
+  width: 32px;
+  height: 32px;
+  flex-grow: 0;
+  border-radius: 25px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border: solid 5px rgba(255, 255, 255, 0.08);
+  background-color: #fff;
+  transition: background 0.3s ease-in-out;
+}
+input[type='range'].with-gradient::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: ew-resize;
+  width: 32px;
+  height: 32px;
+  flex-grow: 0;
+  border-radius: 25px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border: solid 5px rgba(255, 255, 255, 0.08);
+  background-color: #fff;
+  transition: background 0.3s ease-in-out;
+}
+input[type='range'].with-gradient::-moz-range-track,
+input[type='range'].with-gradient::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
 }

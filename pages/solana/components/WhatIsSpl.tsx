@@ -1,5 +1,5 @@
-import Button from '../../../components_2/Button'
-import Header from '../../../components_2/Header'
+import Header from 'components_2/Header'
+import Button from 'components_2/Button'
 
 const SplGov = () => {
   return (
@@ -13,9 +13,9 @@ const SplGov = () => {
           The Solana Standard
         </div>
       </div>
-      <div className="pt-10 pb-6 md:pt-14 md:pb-9">
-        <Header as="h2">SPL Governance</Header>
-      </div>
+      <Header as="h2" className="pt-10 pb-6 md:pt-14 md:pb-9">
+        SPL Governance
+      </Header>
       <div className="flex flex-row flex-wrap lg:flex-nowrap">
         {/* <div className="space-y-6 text-sm md:text-base text-black md:pr-8"> */}
         <div className="space-y-6 text-[14px] md:text-[18px] font-normal tracking-tight leading-[19.6px] md:leading-[25.2px] text-black md:pr-8">

@@ -71,6 +71,16 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
 export default Button
 
+export function CreateDaoButton() {
+  return (
+    <Button>
+      <Link href="/solana/create_dao">
+        <div className="px-14">Create DAO</div>
+      </Link>
+    </Button>
+  )
+}
+
 export const ExploreButton = ({ bgOverride }) => {
   const [isHovering, setIsHovered] = useState(false)
   const onMouseEnter = () => setIsHovered(true)
