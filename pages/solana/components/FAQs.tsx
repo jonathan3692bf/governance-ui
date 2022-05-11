@@ -11,7 +11,7 @@ export const FaqPanel = ({ question, answer }) => {
           <>
             <Disclosure.Button className="w-full pr-4">
               <div className="flex items-start justify-between md:items-center">
-                <div className="mb-0 font-sans text-lg text-left">
+                <div className="mb-0 font-sans text-left text-[18px] leading-[25.2px]">
                   {question}
                 </div>
                 <Chevron props={open} />
@@ -26,9 +26,10 @@ export const FaqPanel = ({ question, answer }) => {
               leaveTo="transform opacity-0"
             >
               <Disclosure.Panel>
-                <p className="pt-2 md:pb-3 text-lg opacity-70 md:w-2/3">
+                {/* <p className="pt-2 md:pb-3 text-md md:text-base opacity-70 md:w-2/3"> */}
+                <div className="pt-2 md:pb-3 md:w-2/3 text-[16px] md:text-[18px] font-normal leading-[22.4px] md:leading-[25.2px] opacity-70">
                   {answer}
-                </p>
+                </div>
               </Disclosure.Panel>
             </Transition>
           </>
@@ -69,18 +70,10 @@ const FAQs = [
 const FAQSection = () => {
   return (
     <div className="py-20 md:pt-36 md:pb-12">
-      <div className="flex flex-wrap">
-        <img
-          src="/img/realms-web/icons/icon-faq.png"
-          className="my-2 h-7 md:mr-4"
-          alt=""
-        />
-        <div className="w-full md:w-fit">
-          <Header as="h2" withGradient>
-            Frequently Asked Questions <br className="invisible md:hidden" />
-            (FAQs)
-          </Header>
-        </div>
+      <div className="w-full text-left">
+        <Header as="h2" withGradient>
+          Frequently Asked Questions
+        </Header>
       </div>
       <div>
         {FAQs.map((props, index) => (

@@ -10,7 +10,7 @@ export const IconInfoBox = ({ imgSrc, title, children }) => {
       />
       <div>
         <Header as="h4">{title}</Header>
-        {children}
+        <div className="text-sm opacity-70 pr-8 md:pr-0">{children}</div>
       </div>
     </div>
   )

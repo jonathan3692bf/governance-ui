@@ -7,8 +7,8 @@ const CreateDaoButton = ({ text, href, className }) => {
     <div className={className}>
       <Link href={href}>
         <Button inverse>
-          <div className="flex items-center justify-between w-full">
-            {/* <div className="flex items-center justify-between w-[306px]"> */}
+          {/* <div className="flex items-center justify-between w-full"> */}
+          <div className="flex items-center justify-between min-w-[10rem] w-[250px]">
             <div className="pr-2">{text}</div>
             <img
               src="/img/realms-web/icons/arrow-thin-blue.png"
@@ -31,7 +31,7 @@ export const SmallImageWithDescription = ({ src, label }) => (
   <div className="flex flex-col text-center">
     {/* NavyBox */}
     <img src={`/img/realms-web/icons/${src}.svg`} className="my-2 h-7" alt="" />
-    <p className="text-sm opacity-70 max-w-[100px]">{label}</p>
+    <div className="text-sm opacity-70 max-w-[100px]">{label}</div>
   </div>
 )
 
@@ -45,26 +45,26 @@ export const DAOType = ({
   buttonHref,
 }) => (
   // GreenBox
-  <div className="flex flex-col items-center md:items-start md:flex-row lg:flex-col">
-    {/* <div className="flex"> */}
+  <div className="flex flex-col items-center md:items-start md:flex-row lg:flex-col min-w-[10rem]">
     {/* OrangeBox */}
-    <div className="md:w-1/5">
+    <div className="min-w-[150px] md:w-1/5">
       <img
         className="max-w-[200px] w-full md:w-[160px] lg:w-[180px]"
         src={`/img/realms-web/icons/${mainImgSrc}.png`}
         alt=""
       />
     </div>
-    <div className="md:w-4/5">
+    <div className="w-4/5 md:w-3/5 lg:w-full">
       <div className="text-center md:text-left">
         {/* LimeBox */}
-        <Header as="h4" className="mb-2 md:mb-5">
+        <Header as="h3" className="mb-2 md:mb-5">
           {headerText}
         </Header>
         {/* LavenderBox */}
-        <p className="font-light text-[14px] md:text-[18px] leading-[19.6px] md:leading-[25.2px] opacity-70">
+        {/* <div className="text-sm md:text-base opacity-70"> */}
+        <div className="font-light text-[14px] md:text-[18px] leading-[19.6px] md:leading-[25.2px] opacity-70">
           {descriptionText}
-        </p>
+        </div>
       </div>
       {/* PurpleBox*/}
       {/* <div className="flex flex-row justify-between space-x-4 px-12 py-4 md:px-0 xl:px-4"> */}
@@ -88,7 +88,8 @@ export const DAOType = ({
 
 export const ListOfDAOTypes = () => {
   return (
-    <div className="flex flex-col justify-betwee space-y-4 md:flex-col lg:flex-row lg:space-x-8">
+    <div className="flex flex-col justify-between space-y-5 md:space-y-20 lg:space-y-0 md:flex-col lg:flex-row lg:space-x-8 mt-8 md:mt-16">
+      {/* <div className="flex flex-col justify-between md:flex-col lg:flex-row lg:space-x-8 mt-16"> */}
       <DAOType
         mainImgSrc="dao-type-medium-multisig"
         headerText="Multi-Signature DAO"
@@ -133,7 +134,7 @@ export const ListOfDAOTypes = () => {
 
 const SelectDAOToCreate = () => {
   return (
-    <div className="py-16 md:pt-24 md:pb-28">
+    <div className="py-16 md:pt-24 md:pb-28 w-full">
       <div className="mb-4 text-center md:text-left">
         <Header as="h2" withGradient>
           What types of DAO <br /> would you like to create?

@@ -12,37 +12,25 @@ export default function PerfectForDAOs() {
         </div>
         <div className="flex flex-col w-full space-y-12 md:space-y-0 md:w-2/3 md:grid md:grid-cols-3 md:gap-16">
           <IconInfoBox imgSrc="pie-chart" title="Near-Zero Fees">
-            <p className="opacity-70">
-              Never worry about fees when launching a DAO, voting, or
-              participating.
-            </p>
+            Never worry about fees when launching a DAO, voting, or
+            participating.
           </IconInfoBox>
           <IconInfoBox imgSrc="treasury" title="Treasury Management">
-            <p className="opacity-70">
-              Leverage shared wallets to decide as a community on resource
-              allocation
-            </p>
+            Leverage shared wallets to decide as a community on resource
+            allocation
           </IconInfoBox>
           <IconInfoBox imgSrc="blockchain" title="Fully On-Chain">
-            <p className="opacity-70">
-              Cement governance decisions to ensure censorship resistance
-            </p>
+            Cement governance decisions to ensure censorship resistance
           </IconInfoBox>
           <IconInfoBox imgSrc="devices" title="One Product">
-            <p className="opacity-70">
-              All the tools and resources you need under the same roof
-            </p>
+            All the tools and resources you need under the same roof
           </IconInfoBox>
           <IconInfoBox imgSrc="magic" title="Easy Creation">
-            <p className="opacity-70">
-              Create and participate in fully on-chain DAOs of all kinds
-            </p>
+            Create and participate in fully on-chain DAOs of all kinds
           </IconInfoBox>
           <div>
             <IconInfoBox imgSrc="solana-logo" title="Solana Standard">
-              <p className="opacity-70">
-                The standard framework for building and scaling DAOs on Solana
-              </p>
+              The standard framework for building and scaling DAOs on Solana
               <div>
                 <a
                   href=""

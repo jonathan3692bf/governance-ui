@@ -11,16 +11,16 @@ export const MetricsBoxPlus = ({ numbers, symbol, text }) => {
           {symbol}
         </h1>
       </div>
-      <p className="inline mt-3 text-lg font-light tracking-tight opacity-70">
+      <div className="inline mt-3 text-lg font-light tracking-tight opacity-70">
         {text}
-      </p>
+      </div>
     </div>
   )
 }
 
 export const MetricsBoxDollar = ({ symbol, numbers, text }) => {
   return (
-    <div className="">
+    <div>
       <div className="flex items-center">
         <h1 className="inline text-xl font-light md:text-5xl tracking-tigh">
           {/* <h1 className="inline text-[20px] md:text-[40px] font-light leading-[55px] md:leading-[39.6px]"> */}
@@ -31,9 +31,9 @@ export const MetricsBoxDollar = ({ symbol, numbers, text }) => {
           {numbers}
         </h1>
       </div>
-      <p className="inline mt-3 text-lg font-light tracking-tight opacity-70">
+      <div className="inline mt-3 text-lg font-light tracking-tight opacity-70">
         {text}
-      </p>
+      </div>
     </div>
   )
 }

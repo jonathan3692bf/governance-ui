@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import Button from 'components_2/Button'
+import Button, { ReadTheDocsButton } from 'components_2/Button'
 import Hero from 'components_2/Hero'
 import Header from 'components_2/Header'
-import Text from 'components_2/Text'
 
 export default function KickstartSolana() {
   return (
@@ -13,10 +12,9 @@ export default function KickstartSolana() {
           <br />
           community on Solana
         </Header>
-        <div className="mt-4 mb-11 md:mb-14 text-white">
-          <Text as="text-base">
-            Create and participate in fully on-chain DAOs of all kinds.
-          </Text>
+        {/* <div className="text-sm md:text-base mt-4 mb-11 md:mb-14 text-white px-16 md:px-0"> */}
+        <div className="mt-4 mb-11 md:mb-14 text-white px-16 md:px-0 text-[14px] md:text-[18px] font-normal trackings-tight leading-[19.6px] md:leading-[25.2px]">
+          Create and participate in fully on-chain DAOs of all kinds.
         </div>
       </div>
       <div className="pb-12 space-y-4 text-center md:pb-24 md:text-left">
@@ -28,16 +26,7 @@ export default function KickstartSolana() {
           </Button>
         </div>
         <div className="block md:hidden">
-          <Button tertiary>
-            <div className="relative flex items-center justify-center">
-              <div className="pl-4 pr-2  border-red">Read the Docs</div>
-              <img
-                src="/img/realms-web/icons/external-link-thin-white.png"
-                className="w-4 h-4 mr-4"
-                alt="External link icon"
-              />
-            </div>
-          </Button>
+          <ReadTheDocsButton />
         </div>
       </div>
     </Hero>

@@ -125,7 +125,7 @@ h4 {
   line-height: 110%; */
 }
 
-/* .landing-page .text-xs {
+.landing-page .text-xs {
   font-size: 12px;
   letter-spacing: 0px;
   line-height: 140%;
@@ -137,11 +137,17 @@ h4 {
   line-height: 140%;
 }
 
+.landing-page .text-md {
+  font-size: 16px;
+  letter-spacing: 0px;
+  line-height: 140%;
+}
+
 .landing-page .text-base {
   font-size: 18px;
   letter-spacing: 0px;
   line-height: 140%;
-} */
+}
 
 p {
   @apply text-sm leading-normal break-words text-fgd-2;

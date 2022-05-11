@@ -2,9 +2,12 @@ import Header from 'components_2/Header'
 
 const TextBox = ({ title, text }) => {
   return (
-    <div className="">
-      <p className="text-lg">{title}</p>
-      <p className="text-base opacity-70">{text}</p>
+    <div>
+      {/* <div className="mb-6 text-md md:text-base"> */}
+      <div className="text-[16px] md:text-[18px] font-light tracking-tight leading-[22.4px] md:leading-[25.2px]">
+        {title}
+      </div>
+      <div className="text-sm opacity-70">{text}</div>
     </div>
   )
 }
@@ -22,7 +25,8 @@ const WhatIsADAO = () => {
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2">
           <div className="md:pr-20">
-            <p className="mb-2 text-base font-light tracking-tight opacity-70">
+            {/* <div className="mb-2 text-sm md:text-base opacity-70"> */}
+            <div className="mb-2 text-[14px] md:text-[18px] font-light tracking-tight leading-[19.6px] md:leading-[25.2px] opacity-70">
               DAOs (decentralized autonomous organizations) are an effective and
               safe way to work with like-minded folks around the globe.
               <br />
@@ -32,12 +36,15 @@ const WhatIsADAO = () => {
               that no one has the authority to access without the approval of
               the group. Decisions are governed by proposals and voting to
               ensure everyone in the organization has a voice.
-            </p>
+            </div>
           </div>
         </div>
         <div className="w-full pt-5 md:w-1/2 md:pt-0">
-          <div className="mb-6 text-lg">Industries DAOs Impact:</div>
-          <div className="grid grid-cols-2 gap-y-4 gap-x-1 md:gap-x-8">
+          {/* <div className="mb-6 text-md md:text-base"> */}
+          <div className="mb-6 text-[16px] md:text-[18px] font-light tracking-tight leading-[22.4px] md:leading-[25.2px]">
+            Industries DAOs Impact:
+          </div>
+          <div className="grid grid-cols-2 gap-y-4 gap-x-8 md:gap-x-12">
             <TextBox title="Defi" text="Enable equitable financial markets" />
             <TextBox
               title="Gaming"

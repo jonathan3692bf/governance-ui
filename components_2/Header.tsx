@@ -14,7 +14,7 @@ export default function Header({
   } else if (as === 'h3') {
     classNames += `text-[20px] md:text-[24px] font-normal leading-[22px] md:leading-[26.4px]`
   } else if (as === 'h4') {
-    classNames += `text-[16px]  md:text-[20px] font-normal leading-[17.6px] md:leading-[22px]`
+    classNames += `text-[16px] md:text-[20px] font-normal leading-[17.6px] md:leading-[22px]`
   }
 
   if (withGradient) {

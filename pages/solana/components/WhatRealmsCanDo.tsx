@@ -25,11 +25,14 @@ const OptionsBox = ({
           className="relative z-[0] w-full rounded"
         />
       </div>
-      <div className="w-full text-center md:w-1/2 md:text-left md:px-16">
-        <Header as="h4" className="mb-4">
+      <div className="w-full md:w-1/2 text-center md:text-left px-12 md:px-16">
+        <Header as="h3" className="mb-4">
           {title}
         </Header>
-        <div className="front-light opacity-70">{description}</div>
+        {/* <div className="text-sm md:text-base"> */}
+        <div className="font-light text-[14px] md:text-[18px] leading-[19.6px] md:leading-[25.2px] opacity-70">
+          {description}
+        </div>
       </div>
     </div>
   )

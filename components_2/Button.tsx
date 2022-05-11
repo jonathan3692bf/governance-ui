@@ -36,7 +36,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   } else if (withBorder) {
     // (Read SPL Gov)
     className +=
-      'py-3 px-2 h-[48px] md:h-[56px] font-regular border border-white hover:text-black hover:bg-white active:bg-white/70'
+      'py-3 px-2 h-[48px] md:h-[56px] w-full sm:w-[310px] font-regular border border-white hover:text-black hover:bg-white active:bg-white/70'
   } else if (inverse) {
     // primary inverse (Create DAO Type)
     className +=
@@ -82,7 +82,7 @@ export const ExploreButton = ({ bgOverride }) => {
         <Link href="/realms">
           <div className="relative flex items-center justify-center">
             <div
-              className={`${bgOverride} rounded-full ml-2 mr-2 p-2 absolute left-[-0.5rem]`}
+              className={`${bgOverride} rounded-full mx-2 p-2 absolute left-[-0.5rem]`}
             >
               <div
                 className={` ${
@@ -110,12 +110,12 @@ export const ReadTheDocsButton = () => {
   return (
     <Button tertiary>
       <div className="relative flex items-center justify-center">
-        <div className="pl-4 pr-2">Read the Docs</div>
         <img
           src="/img/realms-web/icons/external-link-thin-white.png"
-          className="w-4 h-4 mr-4"
+          className="w-4 h-4 mr-3"
           alt="External link icon"
         />
+        <div className="pr-2">Read the Docs</div>
       </div>
     </Button>
   )
