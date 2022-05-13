@@ -75,21 +75,25 @@ export default function Step2({ onSubmit, onPrevClick }) {
 
   useEffect(() => {
     const formData = getFormData()
-
-    if (!yup.object(STEP1_SCHEMA).isValid(formData)) {
-      return onPrevClick(2)
-    } else {
-      updateUserInput(STEP2_SCHEMA, setValue)
-      setInviteList(
-        formData.memberPks?.filter((wallet) => {
-          return validateSolAddress(wallet)
-        }) || []
-      )
-    }
+    yup
+      .object(STEP1_SCHEMA)
+      .isValid(formData)
+      .then((valid) => {
+        if (valid) {
+          updateUserInput(STEP2_SCHEMA, setValue)
+          setInviteList(
+            formData.memberAddresses?.filter((wallet) => {
+              return validateSolAddress(wallet)
+            }) || []
+          )
+        } else {
+          onPrevClick(2)
+        }
+      })
   }, [])
 
   useEffect(() => {
-    setValue('memberPks', inviteList, {
+    setValue('memberAddresses', inviteList, {
       shouldValidate: true,
       shouldDirty: true,
     })
@@ -208,7 +212,7 @@ export default function Step2({ onSubmit, onPrevClick }) {
           )}
           <Input
             type="text"
-            name="memberPks"
+            name="memberAddresses"
             placeholder="e.g. CWvWQWt5mTv7Zx..."
             data-testid="dao-member-list-input"
             ref={inputElement}

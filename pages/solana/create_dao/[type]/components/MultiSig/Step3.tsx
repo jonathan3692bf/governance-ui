@@ -33,13 +33,17 @@ export default function Step3({ onSubmit, onPrevClick }) {
 
   useEffect(() => {
     const formData = getFormData()
-
-    if (!yup.object(STEP2_SCHEMA).isValid(formData)) {
-      return onPrevClick(3)
-    } else {
-      setNumberOfDaoMember(formData?.memberPks?.length)
-      updateUserInput(STEP3_SCHEMA, setValue)
-    }
+    yup
+      .object(STEP2_SCHEMA)
+      .isValid(formData)
+      .then((valid) => {
+        if (valid) {
+          setNumberOfDaoMember(formData?.memberAddresses?.length)
+          updateUserInput(STEP3_SCHEMA, setValue)
+        } else {
+          onPrevClick(3)
+        }
+      })
   }, [])
 
   function serializeValues(values) {
@@ -63,7 +67,7 @@ export default function Step3({ onSubmit, onPrevClick }) {
         <Controller
           name="quorumThreshold"
           control={control}
-          defaultValue="50"
+          defaultValue={50}
           render={({ field }) => (
             <FormField
               title="Adjust the percentage to determine votes needed to pass a proposal"
@@ -71,8 +75,9 @@ export default function Step3({ onSubmit, onPrevClick }) {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <div className="w-[4rem]">
+                  <div className="w-[4.5rem]">
                     <Input
+                      type="number"
                       placeholder="50"
                       data-testid="dao-quorum-input"
                       error={errors.quorumThreshold?.message || ''}
