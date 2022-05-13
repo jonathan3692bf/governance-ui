@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react'
 import Link from 'next/link'
-import Loading from './Loading'
+import Loading from '../components/Loading'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   // disabled?: boolean
