@@ -13,7 +13,7 @@ export default function Header({
   if (as === 'h1') {
     classNames += ` `
   } else if (as === 'h2') {
-    classNames += ` `
+    classNames += ` mobile sm:small md:medium lg:desktop`
   } else if (as === 'h3') {
     classNames += ` `
   } else if (as === 'h4') {

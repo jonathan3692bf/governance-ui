@@ -114,6 +114,7 @@ h1.landing-page {
   letter-spacing: -0.5px;
   line-height: 110%;
 }
+
 .landing-page h2,
 h2.landing-page {
   @apply font-serif;

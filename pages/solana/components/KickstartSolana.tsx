@@ -1,6 +1,7 @@
 import { CreateDaoButton, ReadTheDocsButton } from 'components_2/Button'
 import Hero from 'components_2/Hero'
 import Header from 'components_2/Header'
+// import BtnWithLoader from 'components_2/BtnWithLoader'
 
 export default function KickstartSolana() {
   return (
@@ -22,6 +23,7 @@ export default function KickstartSolana() {
         <div className="block md:hidden">
           <ReadTheDocsButton />
         </div>
+        {/* <BtnWithLoader /> */}
       </div>
     </Hero>
   )
