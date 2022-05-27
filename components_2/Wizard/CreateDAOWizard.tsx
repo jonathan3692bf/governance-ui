@@ -1,4 +1,4 @@
-import FormSummary from './FormSummary'
+import FormSummary from '../FormSummary'
 
 export default function CreateDAOWizard({
   type,
@@ -13,14 +13,14 @@ export default function CreateDAOWizard({
   return (
     <>
       {steps.map(({ Form }, index) => {
-        const visible = index + 1 == currentStep
+        const visible = index == currentStep
         return (
           <div key={index} className={visible ? '' : 'hidden'}>
             <Form
               type={type}
               visible={visible}
               formData={formData}
-              currentStep={index + 1}
+              currentStep={index}
               totalSteps={steps.length + 1}
               onPrevClick={handlePreviousButton}
               onSubmit={handleNextButtonClick}
@@ -32,7 +32,7 @@ export default function CreateDAOWizard({
       {currentStep == steps.length + 1 && (
         <FormSummary
           type={type}
-          currentStep={steps.length + 1}
+          currentStep={currentStep}
           formData={formData}
           onPrevClick={handlePreviousButton}
           onSubmit={handleSubmit}

@@ -29,7 +29,7 @@ import MemberQuorumThresholdForm, {
   MemberQuorumThresholdSchema,
   MemberQuorumThreshold,
 } from 'forms/MemberQuorumThresholdForm'
-import CreateDAOWizard from 'components_2/CreateDAOWizard'
+import CreateDAOWizard from 'components_2/Wizard/CreateDAOWizard'
 
 export const SESSION_STORAGE_FORM_KEY = 'multisig-form-data'
 export const FORM_NAME = 'multisig'

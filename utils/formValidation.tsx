@@ -57,20 +57,22 @@ export function validateSolAddress(address: string) {
 
 export function updateUserInput(formData, schema, setValue) {
   Object.keys(schema).forEach((fieldName) => {
-    const value = formData[fieldName]
-    if (typeof value !== 'undefined') {
-      setValue(fieldName, value, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
+    if (formData) {
+      const value = formData[fieldName]
+      if (typeof value !== 'undefined') {
+        setValue(fieldName, value, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      }
     }
   })
 }
 
 export function isWizardValid({ currentStep, steps, formData }) {
-  if (currentStep > 1 && currentStep <= steps.length + 1) {
+  if (currentStep > 0 && currentStep <= steps.length + 1) {
     const schema = steps
-      .slice(0, currentStep - 1)
+      .slice(0, currentStep)
       .map(({ schema }) => schema)
       .reduce((prev, curr) => {
         return {
@@ -82,7 +84,7 @@ export function isWizardValid({ currentStep, steps, formData }) {
       yup.object(schema).validateSync(formData, { context: formData })
       return true
     } catch (error) {
-      console.log('error', error.message, error.value)
+      console.log('error', error.message, error.values)
       return false
     }
   }

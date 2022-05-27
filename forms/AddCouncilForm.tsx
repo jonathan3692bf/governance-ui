@@ -49,7 +49,17 @@ export default function AddCouncilForm({
   }, [])
 
   function serializeValues(values) {
-    onSubmit({ step: currentStep, data: values })
+    let data
+    if (!values.addCouncil) {
+      data = {
+        ...values,
+        memberAddresses: null,
+        quorumThreshold: null,
+      }
+    } else {
+      data = values
+    }
+    onSubmit({ step: currentStep, data })
   }
 
   return (

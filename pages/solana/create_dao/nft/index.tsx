@@ -38,7 +38,7 @@ import MemberQuorumThresholdForm, {
   MemberQuorumThresholdSchema,
   MemberQuorumThreshold,
 } from 'forms/MemberQuorumThresholdForm'
-import CreateDAOWizard from 'components_2/CreateDAOWizard'
+import CreateDAOWizard from 'components_2/Wizard/CreateDAOWizard'
 
 export const SESSION_STORAGE_FORM_KEY = 'nft-form-data'
 export const FORM_NAME = 'nft'
@@ -219,7 +219,7 @@ export default function NFTWizard() {
       <div className="pt-24 md:pt-28">
         <Section>
           <CreateDAOWizard
-            type={FORM_TYPE}
+            type={FORM_NAME}
             steps={steps}
             currentStep={currentStep}
             formData={formData}

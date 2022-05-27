@@ -23,7 +23,7 @@ function StepProgressIndicator({
     stepTitle = 'NFT community DAO:'
   }
 
-  for (let i = 1; i < totalSteps + 1; i++) {
+  for (let i = 0; i < totalSteps + 1; i++) {
     let className = `w-[18px] h-[1px] `
     if (i <= currentStep) {
       // className += 'step-indicator-with-gradient'
