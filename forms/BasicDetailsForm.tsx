@@ -35,6 +35,7 @@ export interface BasicDetails {
 }
 
 export default function BasicDetailsForm({
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -74,9 +75,10 @@ export default function BasicDetailsForm({
       data-testid="basic-details-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Basic details"
+        stepDescription="basic details"
         title="Let's gather your Governance Token DAO's basic details."
       />
       <div className="pt-10 space-y-10 md:space-y-12">

@@ -57,6 +57,7 @@ export interface AddNFTCollection {
 }
 
 export default function AddNFTCollectionForm({
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -225,9 +226,10 @@ export default function AddNFTCollectionForm({
       data-testid="approval-threshold-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Add a collection"
+        stepDescription="add a collection"
         title="Which NFT collection would you like to add to your DAO?"
       />
       <div className="pt-10 space-y-10 md:space-y-12">

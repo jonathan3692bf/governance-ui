@@ -26,6 +26,7 @@ export interface ApprovalThreshold {
 }
 
 export default function ApprovalThresholdForm({
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -57,10 +58,11 @@ export default function ApprovalThresholdForm({
       data-testid="approval-threshold-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Approval threshold"
-        title="Next, let's determine the approval threshold for community proposals."
+        stepDescription="vote threshold"
+        title="Next, let's determine the vote threshold for approving community proposals."
       />
       <div className="mt-10 space-y-10 md:space-y-12">
         <Controller

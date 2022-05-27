@@ -14,6 +14,7 @@ import Button from '../components_2/ProductButtons'
 import Text from '../components_2/ProductText'
 
 import { updateUserInput, validateSolAddress } from '../utils/formValidation'
+import { FORM_NAME as MULTISIG_FORM } from 'pages/solana/create_dao/multisig'
 
 function InviteAddress({
   address = '',
@@ -83,6 +84,7 @@ export interface InviteMembers {
 
 export default function InviteMembersForm({
   visible,
+  type,
   formData,
   onSubmit,
   onPrevClick,
@@ -216,10 +218,15 @@ export default function InviteMembersForm({
       data-testid="invite-members-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Invite members"
-        title="Next, invite members with their Solana Wallet Address."
+        stepDescription={`invite${
+          type === MULTISIG_FORM ? ' ' : ' council '
+        }members`}
+        title={`Next, invite${
+          type === MULTISIG_FORM ? ' ' : ' council '
+        }members with their Solana Wallet Address.`}
       />
       <div className="pt-10 space-y-10 md:space-y-12">
         <FormField

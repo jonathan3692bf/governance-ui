@@ -46,6 +46,7 @@ import MemberQuorumThresholdForm, {
 import CreateDAOWizard from 'components_2/CreateDAOWizard'
 
 export const SESSION_STORAGE_FORM_KEY = 'govtoken-form-data'
+export const FORM_NAME = 'gov-token'
 
 type GovToken =
   | (BasicDetails &
@@ -231,7 +232,7 @@ export default function GovTokenWizard() {
       <div className="pt-24 md:pt-28">
         <Section form>
           <CreateDAOWizard
-            type="gov-token"
+            type={FORM_NAME}
             steps={steps}
             currentStep={currentStep}
             formData={formData}

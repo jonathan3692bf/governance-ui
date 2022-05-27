@@ -49,6 +49,7 @@ export function ThresholdAdviceBox({ title, children }) {
 
 export default function MemberQuorumThresholdForm({
   visible,
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -92,9 +93,10 @@ export default function MemberQuorumThresholdForm({
       data-testid="member-quorum-threshold-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Council qurorum"
+        stepDescription="council qurorum"
         title="Last, let's determine the quorum required for your council."
       />
       <div className="pt-10 space-y-10 md:space-y-12">

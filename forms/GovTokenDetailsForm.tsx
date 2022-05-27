@@ -89,6 +89,7 @@ export interface GovTokenDetails {
 }
 
 export default function GovTokenDetailsForm({
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -166,9 +167,10 @@ export default function GovTokenDetailsForm({
       data-testid="govtoken-details-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Determine Token"
+        stepDescription="token details"
         title="Next, determine the token your DAO will use for dovernance tasks."
       />
       <div className="pt-16 space-y-10 md:pt-24 md:space-y-12">

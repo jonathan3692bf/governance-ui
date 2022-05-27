@@ -32,6 +32,7 @@ import MemberQuorumThresholdForm, {
 import CreateDAOWizard from 'components_2/CreateDAOWizard'
 
 export const SESSION_STORAGE_FORM_KEY = 'multisig-form-data'
+export const FORM_NAME = 'multisig'
 
 type MultisigForm =
   | (BasicDetails & InviteMembers & MemberQuorumThreshold)
@@ -190,7 +191,7 @@ export default function MultiSigWizard() {
       <div className="pt-24 md:pt-28">
         <Section>
           <CreateDAOWizard
-            type="multisig"
+            type={FORM_NAME}
             steps={steps}
             currentStep={currentStep}
             formData={formData}

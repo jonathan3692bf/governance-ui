@@ -26,6 +26,7 @@ export interface AddCouncil {
 }
 
 export default function AddCouncilForm({
+  type,
   formData,
   currentStep,
   totalSteps,
@@ -57,9 +58,10 @@ export default function AddCouncilForm({
       data-testid="add-council-form"
     >
       <FormHeader
+        type={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
-        stepDescription="Add a council"
+        stepDescription="add a council"
         title="Add a council for your Governance Token DAO."
       />
       <div className="space-y-10 md:space-y-12">

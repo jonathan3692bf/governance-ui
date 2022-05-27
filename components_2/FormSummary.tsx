@@ -8,6 +8,10 @@ import Header from 'components_2/Header'
 import Text from 'components_2/Text'
 import Button from 'components_2/Button'
 
+import { FORM_NAME as GOVTOKEN_FORM } from 'pages/solana/create_dao/gov-token'
+import { FORM_NAME as MULTISIG_FORM } from 'pages/solana/create_dao/multisig'
+import { FORM_NAME as NFT_FORM } from 'pages/solana/create_dao/nft'
+
 function SummaryCell({ className = '', children }) {
   return (
     <div
@@ -118,6 +122,7 @@ export default function WizardSummary({
       </Transition>
       <div data-testid="wizard-summary">
         <FormHeader
+          type={type}
           currentStep={currentStep}
           totalSteps={currentStep}
           stepDescription="Summary"
@@ -144,10 +149,10 @@ export default function WizardSummary({
             </SummaryCell>
             <div
               className={`grid ${
-                type !== 'multisig' ? 'grid-cols-3' : 'grid-cols-2'
+                type !== MULTISIG_FORM ? 'grid-cols-3' : 'grid-cols-2'
               } w-full gap-2 mb-2`}
             >
-              {type === 'nft' && (
+              {type === NFT_FORM && (
                 <SummaryCell className="flex flex-col">
                   <div className="h-10 m-auto">
                     <img
@@ -165,7 +170,7 @@ export default function WizardSummary({
                   </div>
                 </SummaryCell>
               )}
-              {type === 'gov-token' && (
+              {type === GOVTOKEN_FORM && (
                 <>
                   <SummaryCell className="flex flex-col">
                     <div className="h-10 m-auto">

@@ -17,6 +17,7 @@ export default function CreateDAOWizard({
         return (
           <div key={index} className={visible ? '' : 'hidden'}>
             <Form
+              type={type}
               visible={visible}
               formData={formData}
               currentStep={index + 1}

@@ -41,6 +41,7 @@ import MemberQuorumThresholdForm, {
 import CreateDAOWizard from 'components_2/CreateDAOWizard'
 
 export const SESSION_STORAGE_FORM_KEY = 'nft-form-data'
+export const FORM_NAME = 'nft'
 
 type MultisigForm =
   | (BasicDetails &
@@ -218,7 +219,7 @@ export default function NFTWizard() {
       <div className="pt-24 md:pt-28">
         <Section>
           <CreateDAOWizard
-            type="nft"
+            type={FORM_TYPE}
             steps={steps}
             currentStep={currentStep}
             formData={formData}

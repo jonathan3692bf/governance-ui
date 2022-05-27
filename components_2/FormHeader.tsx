@@ -1,12 +1,27 @@
 import Header from 'components_2/ProductHeader'
 import Text from 'components_2/ProductText'
+
+import { FORM_NAME as GOVTOKEN_FORM } from 'pages/solana/create_dao/gov-token'
+import { FORM_NAME as MULTISIG_FORM } from 'pages/solana/create_dao/multisig'
+import { FORM_NAME as NFT_FORM } from 'pages/solana/create_dao/nft'
+
 function StepProgressIndicator({
+  formType,
   currentStep,
   totalSteps,
   stepDescription = '',
 }) {
   const elementsWithGradient: JSX.Element[] = []
   const elementsWithoutGradient: JSX.Element[] = []
+  let stepTitle = ''
+
+  if (formType == GOVTOKEN_FORM) {
+    stepTitle = 'Gov token DAO:'
+  } else if (formType == MULTISIG_FORM) {
+    stepTitle = 'Multisig wallet DAO:'
+  } else if (formType == NFT_FORM) {
+    stepTitle = 'NFT community DAO:'
+  }
 
   for (let i = 1; i < totalSteps + 1; i++) {
     let className = `w-[18px] h-[1px] `
@@ -29,17 +44,18 @@ function StepProgressIndicator({
           {elementsWithoutGradient}
         </div>
       </div>
-      <div className="flex pt-2 space-x-1 text-sm md:text-base">
-        <Text level="2" className="text-[#6de9ff]">
-          Step {currentStep}
+      <div className="flex pt-2">
+        <Text level="2">
+          <span className="text-[#6de9ff] mr-1">{stepTitle}</span>
+          {stepDescription}
         </Text>
-        <Text level="2">{stepDescription}</Text>
       </div>
     </div>
   )
 }
 
 export default function FormHeader({
+  type,
   currentStep,
   totalSteps,
   stepDescription,
@@ -48,6 +64,7 @@ export default function FormHeader({
   return (
     <div>
       <StepProgressIndicator
+        formType={type}
         currentStep={currentStep}
         totalSteps={totalSteps}
         stepDescription={stepDescription}
