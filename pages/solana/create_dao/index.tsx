@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { ListOfDAOTypes } from '../components/SelectDAOToCreate'
 import Hero from 'components_2/Hero'
-import Navbar from 'components_2/NavBar'
+import Navbar from 'components_2/MarketingNavBar'
 
 export default function CreateDaoPage() {
   useEffect(() => {
