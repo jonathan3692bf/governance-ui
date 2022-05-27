@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { PublicKey } from '@solana/web3.js'
 import { getGovernanceProgramVersion } from '@solana/spl-governance'
@@ -12,11 +12,6 @@ import useLocalStorageState from '@hooks/useLocalStorageState'
 import { DEFAULT_GOVERNANCE_PROGRAM_ID } from '@components/instructions/tools'
 
 import { notify } from '@utils/notifications'
-import { isWizardValid } from '@utils/formValidation'
-
-import { Section } from 'pages/solana'
-import Image from 'next/image'
-import Navbar from 'components_2/NavBar'
 
 import BasicDetailsForm, {
   BasicDetailsSchema,
@@ -38,7 +33,7 @@ import MemberQuorumThresholdForm, {
   MemberQuorumThresholdSchema,
   MemberQuorumThreshold,
 } from 'forms/MemberQuorumThresholdForm'
-import CreateDAOWizard from 'components_2/Wizard/CreateDAOWizard'
+import FormPage from 'components_2/Wizard/PageTemplate'
 
 export const SESSION_STORAGE_FORM_KEY = 'nft-form-data'
 export const FORM_NAME = 'nft'
@@ -57,80 +52,29 @@ export default function NFTWizard() {
     {}
   )
   const { connected, connection, current: wallet } = useWalletStore((s) => s)
-  const { pathname, query, push, replace } = useRouter()
+  const { push } = useRouter()
   const { fmtUrlWithCluster } = useQueryContext()
   const [requestPending, setRequestPending] = useState(false)
-  const currentStep =
-    typeof query !== 'undefined'
-      ? query.currentStep
-        ? Number(query.currentStep)
-        : 1
-      : 1
+
   const steps = [
-    { Form: BasicDetailsForm, schema: BasicDetailsSchema },
-    { Form: AddNFTCollectionForm, schema: AddNFTCollectionSchema },
-    { Form: AddCouncilForm, schema: AddCouncilSchema },
-    { Form: InviteMembersForm, schema: InviteMembersSchema },
-    { Form: MemberQuorumThresholdForm, schema: MemberQuorumThresholdSchema },
+    { Form: BasicDetailsForm, schema: BasicDetailsSchema, required: 'true' },
+    {
+      Form: AddNFTCollectionForm,
+      schema: AddNFTCollectionSchema,
+      required: 'true',
+    },
+    { Form: AddCouncilForm, schema: AddCouncilSchema, required: 'true' },
+    {
+      Form: InviteMembersForm,
+      schema: InviteMembersSchema,
+      required: 'form.addCouncil',
+    },
+    {
+      Form: MemberQuorumThresholdForm,
+      schema: MemberQuorumThresholdSchema,
+      required: 'form.addCouncil',
+    },
   ]
-
-  function handleNextButtonClick({ step, data }) {
-    let nextStep
-    if (data.addCouncil === false) {
-      // skip to the end
-      nextStep = step + 3
-    } else {
-      nextStep = step + 1
-    }
-
-    const updatedFormState = {
-      ...formData,
-      ...data,
-    }
-
-    for (const key in updatedFormState) {
-      if (updatedFormState[key] == null) {
-        delete updatedFormState[key]
-      }
-    }
-
-    console.log('next button clicked', step, data, nextStep)
-
-    setFormData(updatedFormState)
-    push({ pathname, query: { ...query, currentStep: nextStep } }, undefined, {
-      shallow: true,
-    })
-  }
-
-  function handlePreviousButton(fromStep, overwriteHistory = false) {
-    console.log('previous button clicked from step:', fromStep, currentStep)
-
-    if (fromStep == 1) {
-      push({ pathname: '/solana/create_dao/' }, undefined, { shallow: true })
-    } else {
-      let previousStep
-      if (fromStep === steps.length + 1 && !formData?.addCouncil) {
-        // skip from the end
-        previousStep = fromStep - 3
-      } else {
-        previousStep = fromStep - 1
-      }
-
-      if (overwriteHistory) {
-        replace(
-          { pathname, query: { ...query, currentStep: previousStep } },
-          undefined,
-          { shallow: true }
-        )
-      } else {
-        push(
-          { pathname, query: { ...query, currentStep: previousStep } },
-          undefined,
-          { shallow: true }
-        )
-      }
-    }
-  }
 
   async function handleSubmit() {
     console.log('submit clicked')
@@ -186,50 +130,13 @@ export default function NFTWizard() {
     }
   }
 
-  function promptUserBeforeLeaving(ev) {
-    ev.preventDefault()
-    ev.returnValue = true
-  }
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', promptUserBeforeLeaving)
-    return () => {
-      window.removeEventListener('beforeunload', promptUserBeforeLeaving)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!isWizardValid({ currentStep, steps, formData })) {
-      handlePreviousButton(currentStep, true)
-    }
-  }, [currentStep])
-
   return (
-    <div className="relative pb-8 md:pb-20 landing-page">
-      <Navbar />
-      <div className="absolute w-[100vw] h-[100vh]">
-        <Image
-          alt="background image"
-          src="/1-Landing-v2/creation-bg-desktop.png"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-        />
-      </div>
-      <div className="pt-24 md:pt-28">
-        <Section>
-          <CreateDAOWizard
-            type={FORM_NAME}
-            steps={steps}
-            currentStep={currentStep}
-            formData={formData}
-            handlePreviousButton={handlePreviousButton}
-            handleNextButtonClick={handleNextButtonClick}
-            handleSubmit={handleSubmit}
-            submissionPending={requestPending}
-          />
-        </Section>
-      </div>
-    </div>
+    <FormPage
+      type={FORM_NAME}
+      ssFormKey={SESSION_STORAGE_FORM_KEY}
+      steps={steps}
+      handleSubmit={handleSubmit}
+      submissionPending={requestPending}
+    />
   )
 }

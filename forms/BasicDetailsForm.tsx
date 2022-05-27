@@ -79,7 +79,7 @@ export default function BasicDetailsForm({
         currentStep={currentStep}
         totalSteps={totalSteps}
         stepDescription="basic details"
-        title="Let's gather your Governance Token DAO's basic details."
+        title="Let's gather your DAO's basic details."
       />
       <div className="pt-10 space-y-10 md:space-y-12">
         {/* <ImageUploader

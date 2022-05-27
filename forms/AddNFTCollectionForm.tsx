@@ -93,8 +93,6 @@ export default function AddNFTCollectionForm({
     ? Math.ceil((Number(numberOfNFTs) * approvalPercent) / 100)
     : undefined
 
-  console.log(collectionMetadata[selectedNFTCollection])
-
   useEffect(() => {
     updateUserInput(formData, AddNFTCollectionSchema, setValue)
     setValue('collectionKey', formData?.collectionKey)
