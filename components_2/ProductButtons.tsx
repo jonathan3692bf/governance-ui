@@ -22,7 +22,15 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   let classNames = `heading-cta default-transition rounded-full focus-visible:outline-none disabled:cursor-not-allowed `
 
-  if (secondary) {
+  if (loading || loadingEnd) {
+    classNames += ' h-[64px] min-w-[208px] border'
+    if (loadingEnd) {
+      classNames +=
+        ' border-confirm-green disabled:border-confirm-green text-confirm-green disabled:text-confirm-green'
+    } else {
+      classNames += ' border-white disabled:border-white'
+    }
+  } else if (secondary) {
     classNames +=
       'py-3 px-2 h-[64px] min-w-[208px] text-white border border-white/30 focus:border-white hover:bg-white hover:text-black active:bg-white/70 active:text-black active:border-none disabled:bg-white/10 disabled:text-black disabled:border-none '
   } else if (radio) {
@@ -34,11 +42,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
     } else {
       classNames +=
         ' focus:bg-white/10 focus:border-none hover:border-white hover:bg-none '
-    }
-  } else if (loading || loadingEnd) {
-    classNames += ' h-[64px] min-w-[208px] border border-white'
-    if (loadingEnd) {
-      classNames += ' border-[#8EFFDD] text-[#8EFFDD]'
     }
   } else {
     // this is a primary button
@@ -62,13 +65,14 @@ export const Button: FunctionComponent<ButtonProps> = ({
     if (loadingEnd) {
       setTimeout(() => {
         setLoadingEnd(false)
-      }, 5000)
+      }, 3000)
     }
   }, [loadingEnd])
   return (
     <button
       className={classNames}
       type={radio ? 'button' : props.type}
+      disabled={props.disabled || loading || loadingEnd}
       {...props}
     >
       {!loading && !loadingEnd ? (
