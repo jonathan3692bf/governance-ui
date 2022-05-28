@@ -29,9 +29,10 @@ import {
 } from '@tools/sdk/units'
 import {
   getWalletPublicKey,
-  sendTransactions,
+  sendTransactionsV2,
   SequenceType,
   WalletSigner,
+  transactionInstructionsToTypedInstructionsSets,
 } from 'utils/sendTransactions'
 import { chunks } from '@utils/helpers'
 import { MIN_COMMUNITY_TOKENS_TO_CREATE_W_0_SUPPLY } from '@tools/constants'
@@ -150,82 +151,7 @@ export const createNFTRealm = async (
     new PublicKey(nftPluginsPks[0]),
     new PublicKey(nftPluginsPks[0])
   )
-  console.log('CREATE NFT REALM realm public-key', realmPk.toBase58())
-  const { registrar } = await getNftRegistrarPDA(
-    realmPk,
-    communityMintPk,
-    nftClient!.program.programId
-  )
-  const instructionCR = nftClient!.program.instruction.createRegistrar(
-    10, // TODO: trust
-    {
-      accounts: {
-        registrar,
-        realm: realmPk,
-        governanceProgramId: programId,
-        realmAuthority: walletPk,
-        governingTokenMint: communityMintPk,
-        payer: wallet.publicKey!,
-        systemProgram: SYSTEM_PROGRAM_ID,
-      },
-    }
-  )
-  console.log(
-    'CREATE NFT REALM registrar PDA',
-    registrar.toBase58(),
-    instructionCR
-  )
 
-  const { maxVoterWeightRecord } = await getNftMaxVoterWeightRecord(
-    realmPk,
-    communityMintPk,
-    nftClient!.program.programId
-  )
-  const instructionMVWR = nftClient!.program.instruction.createMaxVoterWeightRecord(
-    {
-      accounts: {
-        maxVoterWeightRecord,
-        governanceProgramId: programId,
-        realm: realmPk,
-        realmGoverningTokenMint: communityMintPk,
-        payer: wallet.publicKey!,
-        systemProgram: SYSTEM_PROGRAM_ID,
-      },
-    }
-  )
-  console.log(
-    'CREATE NFT REALM max voter weight record',
-    maxVoterWeightRecord.toBase58(),
-    instructionMVWR
-  )
-
-  // const communityMintInfo = await tryGetMint(connection, communityMintPk)
-
-  const weight = getMintNaturalAmountFromDecimalAsBN(
-    collectionWeight, // TODO: come back to this
-    communityMintDecimals
-  )
-  const instructionCC = nftClient!.program.instruction.configureCollection(
-    weight,
-    collectionCount,
-    {
-      accounts: {
-        registrar,
-        realm: realmPk,
-        realmAuthority: wallet,
-        collection: new PublicKey(collectionKey),
-        maxVoterWeightRecord: maxVoterWeightRecord,
-      },
-    }
-  )
-
-  console.log('CREATE NFT REALM configure collection', weight, instructionCC)
-
-  const nftConfigurationTransations = [
-    instructionCR,
-    instructionMVWR,
-    instructionCC,
-  ]
   let tokenOwnerRecordPk: PublicKey
 
   // If the current wallet is in the team then deposit the council token
@@ -307,9 +233,99 @@ export const createNFTRealm = async (
     walletPk
   )
 
+  // // Set the community governance as the realm authority
+  // withSetRealmAuthority(
+  //   realmInstructions,
+  //   programId,
+  //   programVersion,
+  //   realmPk,
+  //   walletPk,
+  //   communityMintGovPk,
+  //   SetRealmAuthorityAction.SetChecked
+  // )
+
+  console.log('CREATE NFT REALM realm public-key', realmPk.toBase58())
+  const { registrar } = await getNftRegistrarPDA(
+    realmPk,
+    communityMintPk,
+    nftClient!.program.programId
+  )
+  const instructionCR = nftClient!.program.instruction.createRegistrar(
+    10, // TODO: trust
+    {
+      accounts: {
+        registrar,
+        realm: realmPk,
+        governanceProgramId: programId,
+        // realmAuthority: communityMintGovPk,
+        realmAuthority: walletPk,
+        governingTokenMint: communityMintPk,
+        payer: walletPk,
+        systemProgram: SYSTEM_PROGRAM_ID,
+      },
+    }
+  )
+  console.log(
+    'CREATE NFT REALM registrar PDA',
+    registrar.toBase58(),
+    instructionCR
+  )
+
+  const { maxVoterWeightRecord } = await getNftMaxVoterWeightRecord(
+    realmPk,
+    communityMintPk,
+    nftClient!.program.programId
+  )
+  const instructionMVWR = nftClient!.program.instruction.createMaxVoterWeightRecord(
+    {
+      accounts: {
+        maxVoterWeightRecord,
+        governanceProgramId: programId,
+        realm: realmPk,
+        realmGoverningTokenMint: communityMintPk,
+        payer: walletPk,
+        systemProgram: SYSTEM_PROGRAM_ID,
+      },
+    }
+  )
+  console.log(
+    'CREATE NFT REALM max voter weight record',
+    maxVoterWeightRecord.toBase58(),
+    instructionMVWR
+  )
+
+  // const communityMintInfo = await tryGetMint(connection, communityMintPk)
+
+  const weight = getMintNaturalAmountFromDecimalAsBN(
+    collectionWeight, // TODO: come back to this
+    communityMintDecimals
+  )
+  const instructionCC = nftClient!.program.instruction.configureCollection(
+    weight,
+    collectionCount,
+    {
+      accounts: {
+        registrar,
+        realm: realmPk,
+        // realmAuthority: communityMintGovPk,
+        realmAuthority: walletPk,
+        collection: new PublicKey(collectionKey),
+        maxVoterWeightRecord: maxVoterWeightRecord,
+      },
+    }
+  )
+
+  console.log('CREATE NFT REALM configure collection', weight, instructionCC)
+
+  const nftConfigurationTransations = [
+    instructionCR,
+    instructionMVWR,
+    instructionCC,
+  ]
+
   // Set the community governance as the realm authority
   withSetRealmAuthority(
-    realmInstructions,
+    nftConfigurationTransations,
     programId,
     programVersion,
     realmPk,
@@ -325,23 +341,27 @@ export const createNFTRealm = async (
       []
     )
     console.log('CREATE NFT REALM sending transactions')
-    const tx = await sendTransactions(
+    const tx = await sendTransactionsV2({
       connection,
       wallet,
-      [
-        mintsSetupInstructions,
-        ...councilMembersChunks,
-        realmInstructions,
-        nftConfigurationTransations,
-      ],
-      [
+      signersSet: [
         mintsSetupSigners,
         ...councilMembersSignersChunks,
         realmSigners,
         nftSigners,
       ],
-      SequenceType.Sequential
-    )
+      TransactionInstructions: [
+        mintsSetupInstructions,
+        ...councilMembersChunks,
+        realmInstructions,
+        nftConfigurationTransations,
+      ].map((x) =>
+        transactionInstructionsToTypedInstructionsSets(
+          x,
+          SequenceType.Sequential
+        )
+      ),
+    })
 
     return {
       tx,
