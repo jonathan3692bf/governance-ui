@@ -42,13 +42,13 @@ const NFTCollectionSelector = ({
                 >
                   <div className="">
                     <img
-                      src={metadata[key].image}
+                      src={metadata[key]?.image}
                       className="w-20 h-20 border border-gray-700 rounded-full"
                       alt="Collection icon"
                     />
                   </div>
                   <div className="flex flex-col grow">
-                    <Text>{metadata[key].name}</Text>
+                    <Text>{metadata[key]?.name}</Text>
                     <Text level="2" className="text-white/50">
                       {totalNfts} {`NFT${totalNfts === 1 ? '' : 's'}`}
                     </Text>

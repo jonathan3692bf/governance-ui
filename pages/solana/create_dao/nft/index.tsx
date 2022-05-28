@@ -2,14 +2,13 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { PublicKey } from '@solana/web3.js'
 import { getGovernanceProgramVersion } from '@solana/spl-governance'
+import { createNFTRealm } from 'actions/createNFTRealm'
+import { DEFAULT_GOVERNANCE_PROGRAM_ID } from '@components/instructions/tools'
 
 import useWalletStore from 'stores/useWalletStore'
-import { createMultisigRealm } from 'actions/createMultisigRealm'
 
 import useQueryContext from '@hooks/useQueryContext'
 import useLocalStorageState from '@hooks/useLocalStorageState'
-
-import { DEFAULT_GOVERNANCE_PROGRAM_ID } from '@components/instructions/tools'
 
 import { notify } from '@utils/notifications'
 
@@ -38,7 +37,7 @@ import FormPage from 'components_2/Wizard/PageTemplate'
 export const SESSION_STORAGE_FORM_KEY = 'nft-form-data'
 export const FORM_NAME = 'nft'
 
-type MultisigForm =
+type NFTForm =
   | (BasicDetails &
       AddNFTCollection &
       AddCouncil &
@@ -47,7 +46,7 @@ type MultisigForm =
   | Record<string, never>
 
 export default function NFTWizard() {
-  const [formData, setFormData] = useLocalStorageState<MultisigForm>(
+  const [formData, setFormData] = useLocalStorageState<NFTForm>(
     SESSION_STORAGE_FORM_KEY,
     {}
   )
@@ -78,6 +77,7 @@ export default function NFTWizard() {
 
   async function handleSubmit() {
     console.log('submit clicked')
+    setRequestPending(true)
     try {
       console.log('connection', connected, wallet)
       if (!connected) {
@@ -98,12 +98,14 @@ export default function NFTWizard() {
         programVersion,
       })
 
-      setRequestPending(true)
-      const results = await createMultisigRealm(
+      const results = await createNFTRealm(
         connection.current,
         governanceProgramId,
         programVersion,
         formData.name,
+        formData.collectionKey,
+        formData.numberOfNFTs,
+        1,
         formData.quorumThreshold,
         formData.memberAddresses.map((w) => new PublicKey(w)),
         wallet

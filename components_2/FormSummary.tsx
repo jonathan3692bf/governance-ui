@@ -6,7 +6,7 @@ import FormFooter from './FormFooter'
 
 import Header from 'components_2/Header'
 import Text from 'components_2/Text'
-import Button from 'components_2/Button'
+import Button from 'components_2/ProductButtons'
 
 import { FORM_NAME as GOVTOKEN_FORM } from 'pages/solana/create_dao/gov-token'
 import { FORM_NAME as MULTISIG_FORM } from 'pages/solana/create_dao/multisig'
@@ -47,8 +47,12 @@ export default function WizardSummary({
   const editRights = formData?.minimumNumberOfTokensToEditDao
   const mintSupplyFactor = formData?.mintSupplyFactor
   const mintAuthority = formData?.transferMintAuthorityToDao
-  const nftCollectionName = formData?.nftCollectionName || '' // 'Bored Ape'
-  const nftCollectionCount = formData?.nftCollectionCount || 0 // 1000000
+  const nftCollectionMetaData =
+    (formData?.collectionKey &&
+      formData?.collectionMetadata[formData.collectionKey]) ||
+    {}
+  const { name: nftCollectionName } = nftCollectionMetaData
+  const nftCollectionCount = formData?.numberOfNFTs || 0 // 1000000
   const approvalThreshold = formData?.approvalThreshold || 0
   const quorumThreshold = formData?.quorumThreshold || 0 // 10
   const numberOfMembers = formData?.memberAddresses?.length || 0 // 1
@@ -96,7 +100,7 @@ export default function WizardSummary({
 
                   <div className="flex flex-wrap items-center justify-center pt-6 space-y-8 sm:space-x-8 md:space-x-0 md:justify-between sm:space-y-0">
                     <Button
-                      withBorder
+                      secondary
                       disabled={submissionPending}
                       onClick={closeModal}
                     >
@@ -107,7 +111,7 @@ export default function WizardSummary({
                     <Button
                       onClick={onSubmit}
                       disabled={submissionPending}
-                      isLoading={submissionPending}
+                      loading={submissionPending}
                     >
                       <div className="px-16 min-w-[300px] sm:min-w-[240px]">
                         Create DAO
