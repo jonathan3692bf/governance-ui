@@ -1,10 +1,10 @@
 import SocialIcons from './SocialIcons'
 import { ReadTheDocsButton } from 'pages/solana'
-import { NavContent } from './NavBar'
+import { NavContent } from './MarketingNavBar'
 
 export default function Footer() {
   return (
-    <div className="w-full bg-night-grey pt-6 md:pt-12 pb-10 md:pb-12">
+    <div className="w-full pt-6 pb-10 bg-night-grey md:pt-12 md:pb-12">
       <NavContent />
       <div className="max-w-[1440px] md:mx-auto mx-4 mt-5 border-t md:px-4 border-white/20 md:border-0 ">
         <div className="md:hidden">
