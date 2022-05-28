@@ -78,8 +78,9 @@ export default function NFTWizard() {
   async function handleSubmit() {
     console.log('submit clicked')
     setRequestPending(true)
+
     try {
-      console.log('connection', connected, wallet)
+      console.log('connection', connected)
       if (!connected) {
         if (wallet) await wallet.connect()
       }
@@ -98,6 +99,13 @@ export default function NFTWizard() {
         programVersion,
       })
 
+      let councilAddresses
+      if (formData?.memberAddresses?.length) {
+        councilAddresses = formData.memberAddresses.map((w) => new PublicKey(w))
+      } else {
+        councilAddresses = [wallet.publicKey]
+      }
+
       const results = await createNFTRealm(
         connection.current,
         governanceProgramId,
@@ -107,7 +115,7 @@ export default function NFTWizard() {
         formData.numberOfNFTs,
         1,
         formData.quorumThreshold,
-        formData.memberAddresses.map((w) => new PublicKey(w)),
+        councilAddresses,
         wallet
       )
 
