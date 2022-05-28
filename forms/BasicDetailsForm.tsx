@@ -18,7 +18,11 @@ import { updateUserInput, validateSolAddress } from '../utils/formValidation'
 
 export const BasicDetailsSchema = {
   avatar: yup.string(),
-  name: yup.string().typeError('Required').required('Required'),
+  name: yup
+    .string()
+    .typeError('Required')
+    .required('Required')
+    .max(32, 'Name must not be longer than 32 characters'),
   description: yup.string(),
   programId: yup
     .string()

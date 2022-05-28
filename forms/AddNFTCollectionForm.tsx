@@ -41,7 +41,7 @@ export const AddNFTCollectionSchema = {
   collectionKey: yup.string().required(),
   numberOfNFTs: yup
     .number()
-    .positive('Must be greater than 0')
+    .min(1, 'Must be at least 1')
     .transform((value) => (isNaN(value) ? undefined : value))
     .required('Required'),
   approvalThreshold: yup
@@ -108,7 +108,7 @@ export default function AddNFTCollectionForm({
     resolver: yupResolver(schema),
   })
 
-  const numberOfNFTs = watch('numberOfNFTs', '') || 10000
+  const numberOfNFTs = watch('numberOfNFTs') || 10000
   const approvalPercent = watch('approvalThreshold', 60)
   const approvalSize = approvalPercent
     ? Math.ceil((Number(numberOfNFTs) * approvalPercent) / 100)
@@ -124,7 +124,6 @@ export default function AddNFTCollectionForm({
   useEffect(() => {
     if (!selectedNFTCollection) {
       setValue('approvalThreshold', 0, { shouldValidate: false })
-      setValue('numberOfNFTs', '', { shouldValidate: false })
     } else {
       setValue('approvalThreshold', 60, { shouldValidate: true })
     }
